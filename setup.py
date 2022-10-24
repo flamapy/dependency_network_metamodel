@@ -12,7 +12,7 @@ setuptools.setup(
     long_description = long_description,
     long_description_content_type = 'text/markdown',
     url = 'https://github.com/GermanMT/dependency_network_metamodel',
-    packages = setuptools.find_namespace_packages(include=['flamapy.*']),
+    packages = ['dn_metamodel'],
     classifiers = [
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
