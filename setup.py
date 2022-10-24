@@ -4,7 +4,7 @@ with open('README.md', 'r') as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name = 'dependency_network_metamodel',
+    name = 'dn_metamodel',
     version = '1.0.0',
     author = 'Antonio Germán Márquez Trujillo',
     author_email = 'amtrujillo@us.es',
