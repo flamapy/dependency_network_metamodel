@@ -5,7 +5,7 @@ with open('README.md', 'r') as fh:
 
 setuptools.setup(
     name = 'dn_metamodel',
-    version = '1.0.0',
+    version = '1.1.0',
     author = 'Antonio Germán Márquez Trujillo',
     author_email = 'amtrujillo@us.es',
     description = 'This repo host the dependency network model concrete classes',
