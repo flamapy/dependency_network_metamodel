@@ -1,6 +1,6 @@
 from famapy.core.transformations import Transformation
 
-from dn_metamodel.models import (DependencyNetwork, Package,
+from famapy.metamodels.dn_metamodel.models import (DependencyNetwork, Package,
                                  RequirementFile, Version)
 
 

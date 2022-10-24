@@ -1,4 +1,3 @@
-
 from datetime import datetime
 
 from famapy.core.models import VariabilityElement, VariabilityModel
