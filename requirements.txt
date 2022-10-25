@@ -1,1 +1,1 @@
-famapy>=1.0.0
+flamapy==1.0.1

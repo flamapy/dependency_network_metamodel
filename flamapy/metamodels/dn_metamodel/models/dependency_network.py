@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from famapy.core.models import VariabilityElement, VariabilityModel
+from flamapy.core.models import VariabilityElement, VariabilityModel
 
 
 class Version(VariabilityElement):

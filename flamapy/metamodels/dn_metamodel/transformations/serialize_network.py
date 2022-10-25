@@ -1,6 +1,6 @@
-from famapy.core.transformations import Transformation
+from flamapy.core.transformations import Transformation
 
-from famapy.metamodels.dn_metamodel.models import (DependencyNetwork, Package,
+from flamapy.metamodels.dn_metamodel.models import (DependencyNetwork, Package,
                                  RequirementFile, Version)
 
 
