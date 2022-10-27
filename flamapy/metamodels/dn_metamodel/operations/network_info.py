@@ -26,8 +26,8 @@ class NetworkInfo(Operation):
                     self.indirect(version)
         self.result['constraints'] = self.result['direct_dependencies'] + self.result['indirect_dependencies']
 
-    def indirect(self, version: Version) -> None:
-        for package in version.packages:
+    def indirect(self, p_version: Version) -> None:
+        for package in p_version.packages:
             self.result['indirect_dependencies'] += 1
             for version in package.versions:
                 for _ in version.cves:
