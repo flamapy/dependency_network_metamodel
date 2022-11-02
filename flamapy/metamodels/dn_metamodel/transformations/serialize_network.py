@@ -3,6 +3,8 @@ from flamapy.core.transformations import Transformation
 from flamapy.metamodels.dn_metamodel.models import (DependencyNetwork, Package,
                                  RequirementFile, Version)
 
+from copy import copy
+
 
 class SerializeNetwork(Transformation):
 
@@ -23,21 +25,32 @@ class SerializeNetwork(Transformation):
             setattr(self, key, kwargs.get(key))
 
     def transform(self) -> None:
-        requirement_files = [self.transform_requirement_file(requirement_file) for requirement_file in self.source_model['requirement_files']]
-        self.source_model['requirement_files'] = requirement_files
+        self.source_model['requirement_files'] = [self.transform_requirement_file(req_file) for req_file in self.source_model['requirement_files']]
         self.destination_model = DependencyNetwork(**self.source_model)
 
-    def transform_requirement_file(self, requirement_file) ->RequirementFile:
-        packages = [self.transform_package(package) for package in requirement_file['packages']]
-        requirement_file['packages'] = packages
-        return RequirementFile(**requirement_file)
+    def transform_requirement_file(self, requirement_file: dict) -> RequirementFile:
+        requirement_file['packages'] = [self.transform_package(package) for package in requirement_file['packages']]
+        req_file = RequirementFile(**requirement_file)
+        return req_file
 
-    def transform_package(self, package) -> Package:
-        versions = [self.transform_version(version) for version in package['versions']]
-        package['versions'] = versions
-        return Package(**package)
+    def transform_package(self, package: dict) -> Package:
+        raw_versions = copy(package['versions'])
+        package['versions'] = []
+        new_package = Package(**package)
+        versions = []
+        for version in raw_versions:
+            new_version = self.transform_version(version)
+            versions.append(new_version)
+        new_package.versions = versions
+        return new_package
 
-    def transform_version(self, version) -> Version:
-        packages = [self.transform_package(package) for package in version['packages']]
-        version['packages'] = packages
-        return Version(**version)
+    def transform_version(self, version: dict) -> Version:
+        raw_packages = copy(version['packages'])
+        version['packages'] = []
+        new_version = Version(**version)
+        packages = []
+        for package in raw_packages:
+            new_package = self.transform_package(package)
+            packages.append(new_package)
+        new_version.packages = packages
+        return new_version
