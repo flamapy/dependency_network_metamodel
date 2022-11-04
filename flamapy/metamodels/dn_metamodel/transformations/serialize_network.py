@@ -3,8 +3,6 @@ from flamapy.core.transformations import Transformation
 from flamapy.metamodels.dn_metamodel.models import (DependencyNetwork, Package,
                                  RequirementFile, Version)
 
-from copy import copy
-
 
 class SerializeNetwork(Transformation):
 
@@ -34,7 +32,7 @@ class SerializeNetwork(Transformation):
         return req_file
 
     def transform_package(self, package: dict) -> Package:
-        raw_versions = copy(package['versions'])
+        raw_versions = package['versions']
         package['versions'] = []
         new_package = Package(**package)
         versions = []
@@ -45,7 +43,7 @@ class SerializeNetwork(Transformation):
         return new_package
 
     def transform_version(self, version: dict) -> Version:
-        raw_packages = copy(version['packages'])
+        raw_packages = version['packages']
         version['packages'] = []
         new_version = Version(**version)
         packages = []
