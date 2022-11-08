@@ -1,4 +1,5 @@
 from flamapy.core.operations import Operation
+
 from flamapy.metamodels.dn_metamodel.models import DependencyNetwork, Version
 
 
