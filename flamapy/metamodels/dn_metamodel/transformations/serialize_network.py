@@ -1,7 +1,6 @@
 from flamapy.core.transformations import Transformation
 
-from flamapy.metamodels.dn_metamodel.models import (DependencyNetwork, Package,
-                                 RequirementFile, Version)
+from flamapy.metamodels.dn_metamodel.models import DependencyNetwork
 
 
 class SerializeNetwork(Transformation):
