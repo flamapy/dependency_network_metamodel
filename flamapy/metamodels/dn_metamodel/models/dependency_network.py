@@ -37,8 +37,9 @@ class Version(VariabilityElement):
             'patch',
             'build_number',
             'release_date',
-            'packages_edges',
-            'cves'
+            'cves',
+            'count',
+            'packages'
         ]
         for key in keys:
             setattr(self, key, kwargs.get(key))
