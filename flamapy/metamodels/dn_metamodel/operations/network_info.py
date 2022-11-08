@@ -13,10 +13,10 @@ class NetworkInfo(Operation):
             'indirect_cves': 0,
             'constraints': 0
         }
-        self.direct_dependencies: list = []
-        self.indirect_dependencies: list = []
-        self.direct_cves: list = []
-        self.indirect_cves: list = []
+        self.direct_dependencies: list[str] = []
+        self.indirect_dependencies: list[str] = []
+        self.direct_cves: list[str] = []
+        self.indirect_cves: list[str] = []
 
     def get_result(self) -> dict[str, int]:
         return self.result

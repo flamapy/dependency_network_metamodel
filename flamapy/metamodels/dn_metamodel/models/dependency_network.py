@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Any
 
 from flamapy.core.models import VariabilityElement, VariabilityModel
 
@@ -25,11 +26,11 @@ class Version(VariabilityElement):
     patch: int
     build_number: int
     release_date: datetime
-    cves: list[dict]
+    cves: list[dict[str, Any]]
     count: int
     packages: list['Package']
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: dict[str, Any]) -> None:
         keys = [
             'release',
             'mayor',
@@ -60,7 +61,7 @@ class Package(VariabilityElement):
     name: str
     versions: list['Version']
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: dict[str, Any]) -> None:
         valid_keys = [
             'name',
             'versions'
@@ -85,7 +86,7 @@ class RequirementFile():
     manager: str
     packages: list['Package']
 
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: dict[str, Any]) -> None:
         valid_keys = [
             'name',
             'manager',
@@ -116,7 +117,7 @@ class DependencyNetwork(VariabilityModel):
     def get_extension() -> str:
         return 'dn'
     
-    def __init__(self, **kwargs) -> None:
+    def __init__(self, **kwargs: dict[str, Any]) -> None:
         valid_keys = [
             'owner',
             'name',
