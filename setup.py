@@ -5,7 +5,7 @@ with open('README.md', 'r') as fh:
 
 setuptools.setup(
     name = 'flamapy-dn',
-    version = '1.1.1',
+    version = '1.1.2',
     author = 'Antonio Germán Márquez Trujillo',
     author_email = 'amtrujillo@us.es',
     description = 'This repo host the dependency network model concrete classes',

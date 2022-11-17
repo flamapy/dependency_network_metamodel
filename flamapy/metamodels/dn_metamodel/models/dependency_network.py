@@ -72,6 +72,7 @@ class Package(VariabilityElement):
     def __str__(self) -> str:
         return f'{self.name}'
 
+
 class RequirementFile():
 
     '''
@@ -116,7 +117,7 @@ class DependencyNetwork(VariabilityModel):
     @staticmethod
     def get_extension() -> str:
         return 'dn'
-    
+
     def __init__(self, **kwargs: dict[str, Any]) -> None:
         valid_keys = [
             'owner',
