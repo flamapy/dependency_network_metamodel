@@ -20,6 +20,7 @@ setuptools.setup(
     ],
     python_requires='>=3.10',
     install_requires=[
+        'wheel==0.38.4',
         'flamapy==1.0.1'
     ],
     tests_requires=[
