@@ -17,6 +17,7 @@ class NetworkInfo(Operation):
         self.indirect_dependencies: list[str] = []
         self.direct_cves: list[str] = []
         self.indirect_cves: list[str] = []
+        self.keys: list[str] = []
 
     def get_result(self) -> dict[str, int]:
         return self.result
@@ -32,30 +33,34 @@ class NetworkInfo(Operation):
     def search(self, parent: Version | RequirementFile, level: str) -> None:
         self.result['constraints'] += len(parent.packages)
         for package in parent.packages:
-            if (
-                package.name not in self.indirect_dependencies and
-                package.name not in self.direct_dependencies
-            ):
-                self.add_dependencie(package.name, level)
+            if level == 'direct':
+                self.add_direct_dependencie(package.name)
+            elif level == 'indirect':
+                self.add_indirect_dependencie(package.name)
+            key = package.name + str(package.constraints)
+            if key in self.keys:
+                break
+            self.keys.append(key)
             for version in package.versions:
                 for cve in version.cves:
-                    if (
-                        cve['id'] not in self.indirect_cves and 
-                        cve['id'] not in self.direct_cves
-                    ):
-                        self.add_cve(cve['id'], level)
+                    if level == 'direct':
+                        self.add_direct_cve(cve['id'])
+                    elif level == 'indirect':
+                        self.add_indirect_cve(cve['id'])
                 self.search(version, 'indirect')
 
-    def add_dependencie(self, dependencie_name: str, level: str) -> None:
-        match level:
-            case 'direct':
-                self.direct_dependencies.append(dependencie_name)
-            case 'indirect':
-                self.indirect_dependencies.append(dependencie_name)
+    def add_direct_dependencie(self, dependencie_name: str) -> None:
+        if dependencie_name not in self.direct_dependencies:
+            self.direct_dependencies.append(dependencie_name)
 
-    def add_cve(self, cve_id: str, level: str) -> None:
-        match level:
-            case 'direct':
-                self.direct_cves.append(cve_id)
-            case 'indirect':
-                self.indirect_cves.append(cve_id)
+    def add_indirect_dependencie(self, dependencie_name: str) -> None:
+        if dependencie_name not in self.indirect_dependencies:
+            self.indirect_dependencies.append(dependencie_name)
+
+    def add_direct_cve(self, cve_id: str) -> None:
+        if cve_id not in self.direct_cves:
+            self.direct_cves.append(cve_id)
+
+    def add_indirect_cve(self, cve_id: str) -> None:
+        if cve_id not in self.indirect_cves:
+            self.indirect_cves.append(cve_id)

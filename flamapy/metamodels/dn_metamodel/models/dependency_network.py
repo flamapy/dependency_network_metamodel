@@ -54,16 +54,19 @@ class Package(VariabilityElement):
     '''
     Package(
         name: str,
+        constraints: dict[str, str] | str,
         versions: list[Version]
     )
     '''
 
     name: str
+    constraints: list[dict[str, str]] | str
     versions: list['Version']
 
     def __init__(self, **kwargs: dict[str, Any]) -> None:
         valid_keys = [
             'name',
+            'constraints',
             'versions'
         ]
         for key in valid_keys:
