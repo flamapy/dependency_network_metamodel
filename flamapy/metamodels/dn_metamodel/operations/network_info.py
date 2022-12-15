@@ -39,7 +39,7 @@ class NetworkInfo(Operation):
                 self.add_indirect_dependencie(package.name)
             key = package.name + str(package.constraints)
             if key in self.keys:
-                break
+                continue
             self.keys.append(key)
             for version in package.versions:
                 for cve in version.cves:
