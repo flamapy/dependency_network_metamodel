@@ -1,3 +1,5 @@
+from typing import Any
+
 from flamapy.core.operations import Operation
 
 from flamapy.metamodels.dn_metamodel.models import DependencyNetwork, RequirementFile, Version
@@ -6,7 +8,7 @@ from flamapy.metamodels.dn_metamodel.models import DependencyNetwork, Requiremen
 class NetworkInfo(Operation):
 
     def __init__(self) -> None:
-        self.result: dict[str, int] = {
+        self.result: dict[str, Any] = {
             'direct_dependencies': 0,
             'indirect_dependencies': 0,
             'direct_cves': 0,
@@ -20,7 +22,7 @@ class NetworkInfo(Operation):
         self.indirect_cves: list[str] = []
         self.keys: list[str] = []
 
-    def get_result(self) -> dict[str, int]:
+    def get_result(self) -> dict[str, Any]:
         return self.result
 
     def execute(self, model: DependencyNetwork) -> None:
