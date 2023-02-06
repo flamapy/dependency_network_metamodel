@@ -11,7 +11,8 @@ class NetworkInfo(Operation):
             'indirect_dependencies': 0,
             'direct_cves': 0,
             'indirect_cves': 0,
-            'constraints': 0
+            'constraints': 0,
+            'list_of_cves': []
         }
         self.direct_dependencies: list[str] = []
         self.indirect_dependencies: list[str] = []
@@ -29,6 +30,8 @@ class NetworkInfo(Operation):
         self.result['indirect_dependencies'] = len(self.indirect_dependencies)
         self.result['direct_cves'] = len(self.direct_cves)
         self.result['indirect_cves'] = len(self.indirect_cves)
+        self.result['list_of_cves'].extend(self.direct_cves)
+        self.result['list_of_cves'].extend(self.indirect_cves)
 
     def search(self, parent: Version | RequirementFile, level: str) -> None:
         self.result['constraints'] += len(parent.packages)
