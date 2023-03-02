@@ -13,7 +13,7 @@ class NetworkInfo(Operation):
             'indirect_dependencies': 0,
             'direct_cves': 0,
             'indirect_cves': 0,
-            'constraints': 0,
+            'edges': 0,
             'list_of_cves': []
         }
         self.direct_dependencies: list[str] = []
@@ -36,7 +36,7 @@ class NetworkInfo(Operation):
         self.result['list_of_cves'].extend(self.indirect_cves)
 
     def search(self, parent: Version | RequirementFile, level: str) -> None:
-        self.result['constraints'] += len(parent.packages)
+        self.result['edges'] += len(parent.packages)
         for package in parent.packages:
             if level == 'direct':
                 self.add_direct_dependencie(package.name)
